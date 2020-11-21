@@ -1,0 +1,91 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:PanCake="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
+             mc:Ignorable="d"
+             x:Class="App8.MainPage">
+
+    <Grid Padding="25,0,0,0" >
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="Auto"/>
+        </Grid.ColumnDefinitions>
+    <!-- 1. Main header-->
+
+        <!--Points-->
+        <Image Grid.Row="0" Grid.Column="0" Source="Points" HeightRequest="25" />
+        <!--Cart icon-->
+        <Image Grid.Row="0" Grid.Column="1" Source="Find" HeightRequest="30" HorizontalOptions="End"/>
+        <!--Cart heart-->
+        <Image Grid.Row="0" Grid.Column="2" Source="Heart_" HeightRequest="30" Margin="30,0,0,0" HorizontalOptions="Start"/>
+        <!--Cart counter-->
+        <PanCake:PancakeView Grid.Row="0" Grid.Column="3"
+                    WidthRequest="140" CornerRadius="0,0,20,0"
+                    HeightRequest="100">
+            <Button Grid.Row="0" Text="CART (8)" TextColor="Black" FontAttributes="Bold" FontSize="14" BackgroundColor="#fcf6f2" />
+        </PanCake:PancakeView>
+
+        <!-- 2. Title-->
+        <Label Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="4">
+            <Label.FormattedText>
+                <FormattedString>
+                    <Span Text="Candy&#10;" FontSize="48"/>
+                    <Span Text="Sneakers" FontAttributes="Bold" FontSize="48"/>
+                </FormattedString>
+            </Label.FormattedText>
+        </Label>
+
+        <Button Grid.Row="1" Grid.Column="3" HorizontalOptions="End" Margin="0,0,25,0" VerticalOptions="Center" BorderWidth="2" CornerRadius="10" WidthRequest="45" BackgroundColor="Transparent" BorderColor="#e4e2e1" ImageSource="Lines"/>
+        <!-- 3. Sneaker list-->
+            <CollectionView Grid.Column="0" Margin="0,0,25,0"
+                                Grid.Row="2" Grid.ColumnSpan="4"
+                                VerticalScrollBarVisibility="Never" 
+                               
+                                VerticalOptions="StartAndExpand"
+                            x:Name="colecaoJogos" SelectionMode="Single" SelectionChanged="colecaoJogos_SelectionChanged"
+                        >
+            <CollectionView.ItemsLayout>
+                <GridItemsLayout Orientation="Vertical"
+                                                    Span="2" />
+            </CollectionView.ItemsLayout>
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Grid  Padding="8" HeightRequest="300">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <PanCake:PancakeView CornerRadius="20,20,20,20" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2">
+                            <Image Source="{Binding UriImagem}" Aspect="AspectFill"/>
+                        </PanCake:PancakeView>
+                        <Button Grid.Row="0" Grid.Column="1" Margin="0,7,5,0" ImageSource="Heart24" VerticalOptions="Start" HorizontalOptions="End" HeightRequest="40" WidthRequest="40" CornerRadius="20" BackgroundColor="White"/>
+                        <Label Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Text="{Binding Titulo}" Margin="0,13,0,6"/>
+                        <Label Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2">
+                            <Label.FormattedText>
+                                <FormattedString>
+                                    <Span Text="€ "/>
+                                    <Span Text="{Binding Preco}" FontAttributes="Bold" FontSize="22"/>
+                                </FormattedString>
+                            </Label.FormattedText>
+                        </Label>
+                    </Grid>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </Grid>
+ 
+</ContentPage>
